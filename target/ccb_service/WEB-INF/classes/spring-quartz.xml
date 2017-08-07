@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <!-- 设置NFC注册定时器信息orderQuery start-->
+  	<bean id="scheduledOrderNFC" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+  		<property name="targetObject">
+	    	<bean class="com.zhl.ccb.quartz.NFCqueryService" />
+	    </property>
+	    <property name="targetMethod">
+            <value>status</value>
+        </property>
+        <property name="concurrent" value="false" />
+  	</bean>
+  	<!-- 设置NFC注册定时器信息orderQuery  end-->
+  	<!-- 设置NFC调度定时任务orderQuery  start-->
+    <bean id="NFCorderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="scheduledOrderNFC" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0/2 * * * ?</value>
+        </property>
+    </bean>
+    <!-- 设置NFC调度定时任务orderQuery  end--> 
+    
+    <!-- 设置NFC注册定时器信息refundOrderQuery start-->
+  	<bean id="scheduledRefundNFC" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+  		<property name="targetObject">
+	    	<bean class="com.zhl.ccb.quartz.NFCRefundService" />
+	    </property>
+	    <property name="targetMethod">
+            <value>status</value>
+        </property>
+        <property name="concurrent" value="false" />
+  	</bean>
+  	<!-- 设置NFC注册定时器信息refundOrderQuery  end-->
+    <!-- 设置NFC调度定时任务refundOrderQuery  start-->
+    <bean id="NFCrefundTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="scheduledRefundNFC" />
+        </property>
+        <property name="cronExpression">
+            <!-- <value>0 0/5 * * * ?</value> --><!-- 每5分钟调一次 -->
+            <value>0 0 0/1 * * ?</value><!-- 每1小时调一次 --> 
+        </property>
+    </bean>
+    <!-- 设置NFC调度定时任务refundOrderQuery  end--> 
+    
+    <!-- 设置NFC注册定时器信息TransBillWater start-->
+  	<bean id="scheduledTransBillWaterNFC" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+  		<property name="targetObject">
+	    	<bean class="com.zhl.ccb.service.Impl.CcbTransBillServiceImpl" />
+	    </property>
+	    <property name="targetMethod">
+            <value>status</value>
+        </property>
+        <property name="arguments">
+        <list>   
+            <value>quartz</value>   
+         </list>
+        </property>
+        <property name="concurrent" value="false" />
+  	</bean>
+  	<!-- 设置NFC注册定时器信息TransBillWater end-->
+  	<!-- 设置NFC调度定时任务TransBillWater start-->
+    <bean id="NFCTransBillWaterTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="scheduledTransBillWaterNFC" />
+        </property>
+        <property name="cronExpression">
+            <value>0 0 12 * * ?</value><!-- 每天12点触发一次 -->
+            <!--<value>0 0/5 * * * ?</value>--> 
+        </property>
+    </bean>
+    <!-- 设置NFC调度定时任务TransBillWater end-->
+    
+    
+    <!-- 调度工厂 -->
+  	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <!-- <property name="jobDetails">
+			<list>
+				<ref bean="simpleJobDetail" />
+			</list>
+	    </property> -->
+	    <property name="triggers">
+	      	<list>
+	        	<ref bean="NFCorderTrigger" />
+	        	<ref bean="NFCrefundTrigger" />
+	        	<ref bean="NFCTransBillWaterTrigger" />
+	      	</list>
+	    </property>
+  	</bean>
+</beans>

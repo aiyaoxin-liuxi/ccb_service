@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhl.ccb.dao.NfcOrderWaterMapper" >
+<resultMap id="BaseResultMap" type="com.zhl.ccb.model.NfcOrderWater" >
+    <id column="MER_ORDER_NO" property="merOrderNo" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ORDER_NO" property="channelOrderNo" jdbcType="VARCHAR" />
+    <result column="REFUND_ORDER_NO" property="refundOrderNo" jdbcType="VARCHAR" />
+    <result column="SUB_MERCH_NO" property="subMerchNo" jdbcType="VARCHAR" />
+    <result column="MERCH_NO" property="merchNo" jdbcType="VARCHAR" />
+    <result column="MERCH_CHANNEL" property="merchChannel" jdbcType="VARCHAR" />
+    <result column="NFC_TYPE" property="nfcType" jdbcType="VARCHAR" />
+    <result column="NFC_MERCH" property="nfcMerch" jdbcType="VARCHAR" />
+    <result column="TOTAL_FEE" property="totalFee" jdbcType="DECIMAL" />
+    <result column="MERCH_FEE" property="merchFee" jdbcType="DECIMAL" />
+    <result column="REFUND_FEE" property="refundFee" jdbcType="DECIMAL" />
+    <result column="REFUND_CHANNE" property="refundChanne" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="NOTIFY_URL" property="notifyUrl" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+    <result column="END_TIME" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MER_ORDER_NO, ORDER_NO, CHANNEL_ORDER_NO, REFUND_ORDER_NO, SUB_MERCH_NO, MERCH_NO, MERCH_CHANNEL, NFC_TYPE, 
+    NFC_MERCH, TOTAL_FEE, MERCH_FEE, REFUND_FEE, REFUND_CHANNE, CURRENCY, NOTIFY_URL, 
+    REMARK, CREATED_TIME, STATUS, MESSAGE, END_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DHB_NFC_ORDER_WATER
+    where MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DHB_NFC_ORDER_WATER
+    where MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhl.ccb.model.NfcOrderWater" >
+    insert into DHB_NFC_ORDER_WATER (MER_ORDER_NO, ORDER_NO, CHANNEL_ORDER_NO, REFUND_ORDER_NO, 
+      SUB_MERCH_NO, MERCH_NO, MERCH_CHANNEL, 
+      NFC_TYPE, NFC_MERCH, TOTAL_FEE, 
+      MERCH_FEE, REFUND_FEE, REFUND_CHANNE, 
+      CURRENCY, NOTIFY_URL, REMARK, 
+      CREATED_TIME, STATUS, MESSAGE, 
+      END_TIME)
+    values (#{merOrderNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{channelOrderNo,jdbcType=VARCHAR}, #{refundOrderNo,jdbcType=VARCHAR}, 
+      #{subMerchNo,jdbcType=VARCHAR}, #{merchNo,jdbcType=VARCHAR}, #{merchChannel,jdbcType=VARCHAR}, 
+      #{nfcType,jdbcType=VARCHAR}, #{nfcMerch,jdbcType=VARCHAR}, #{totalFee,jdbcType=DECIMAL}, 
+      #{merchFee,jdbcType=DECIMAL}, #{refundFee,jdbcType=DECIMAL}, #{refundChanne,jdbcType=VARCHAR}, 
+      #{currency,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createdTime}, #{status,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{endTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhl.ccb.model.NfcOrderWater" >
+    insert into DHB_NFC_ORDER_WATER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merOrderNo != null" >
+        MER_ORDER_NO,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="channelOrderNo != null" >
+        CHANNEL_ORDER_NO,
+      </if>
+      <if test="refundOrderNo != null" >
+        REFUND_ORDER_NO,
+      </if>
+      <if test="subMerchNo != null" >
+        SUB_MERCH_NO,
+      </if>
+      <if test="merchNo != null" >
+        MERCH_NO,
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL,
+      </if>
+      <if test="nfcType != null" >
+        NFC_TYPE,
+      </if>
+      <if test="nfcMerch != null" >
+        NFC_MERCH,
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE,
+      </if>
+      <if test="merchFee != null" >
+        MERCH_FEE,
+      </if>
+      <if test="refundFee != null" >
+        REFUND_FEE,
+      </if>
+      <if test="refundChanne != null" >
+        REFUND_CHANNE,
+      </if>
+      <if test="currency != null" >
+        CURRENCY,
+      </if>
+      <if test="notifyUrl != null" >
+        NOTIFY_URL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="message != null" >
+        MESSAGE,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merOrderNo != null" >
+        #{merOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelOrderNo != null" >
+        #{channelOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundOrderNo != null" >
+        #{refundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subMerchNo != null" >
+        #{subMerchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchNo != null" >
+        #{merchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcType != null" >
+        #{nfcType,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcMerch != null" >
+        #{nfcMerch,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="merchFee != null" >
+        #{merchFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundFee != null" >
+        #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundChanne != null" >
+        #{refundChanne,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhl.ccb.model.NfcOrderWater" >
+    update DHB_NFC_ORDER_WATER
+    <set >
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelOrderNo != null" >
+        CHANNEL_ORDER_NO = #{channelOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundOrderNo != null" >
+        REFUND_ORDER_NO = #{refundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subMerchNo != null" >
+        SUB_MERCH_NO = #{subMerchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchNo != null" >
+        MERCH_NO = #{merchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcType != null" >
+        NFC_TYPE = #{nfcType,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcMerch != null" >
+        NFC_MERCH = #{nfcMerch,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="merchFee != null" >
+        MERCH_FEE = #{merchFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundFee != null" >
+        REFUND_FEE = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundChanne != null" >
+        REFUND_CHANNE = #{refundChanne,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime}
+      </if>
+    </set>
+    where MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhl.ccb.model.NfcOrderWater" >
+    update DHB_NFC_ORDER_WATER
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      CHANNEL_ORDER_NO = #{channelOrderNo,jdbcType=VARCHAR},
+      REFUND_ORDER_NO = #{refundOrderNo,jdbcType=VARCHAR},
+      SUB_MERCH_NO = #{subMerchNo,jdbcType=VARCHAR},
+      MERCH_NO = #{merchNo,jdbcType=VARCHAR},
+      MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      NFC_TYPE = #{nfcType,jdbcType=VARCHAR},
+      NFC_MERCH = #{nfcMerch,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      MERCH_FEE = #{merchFee,jdbcType=DECIMAL},
+      REFUND_FEE = #{refundFee,jdbcType=DECIMAL},
+      REFUND_CHANNE = #{refundChanne,jdbcType=VARCHAR},
+      CURRENCY = #{currency,jdbcType=VARCHAR},
+      NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime},
+      STATUS = #{status,jdbcType=VARCHAR},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      END_TIME = #{endTime}
+    where MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectAll" resultMap="BaseResultMap">  
+  		select * from DHB_NFC_ORDER_WATER 
+  </select>
+  
+  <!-- 结果映射 -->
+  <resultMap id="twoBean" type="com.zhl.ccb.model.NfcOrderWater">
+  	<result column="mer_order_no" property="merOrderNo"/>
+  	<result column="order_no" property="orderNo"/>
+  	<association property="nfcMerchMerch" column="merch_no" javaType="com.zhl.ccb.model.NfcMerch">
+  		<id column="merch_no" property="merchNo"/>
+  		<result column="merch_name" property="merchName"/> 
+  	</association>
+  </resultMap>
+  <select id="selNfcMerch" resultMap="twoBean">  
+  		select w.mer_order_no,w.order_no,m.merch_name from DHB_NFC_ORDER_WATER w left join DHB_NFC_MERCH m on w.merch_no = m.merch_no 
+		where 1=1 and w.merch_no = '888301000000002'
+  </select>
+  
+ 	 <!-- 查询中信支付交易流水 -->
+  	<select id="selTransWater" resultMap="BaseResultMap">
+     	select * from DHB_NFC_ORDER_WATER where 1=1 
+      	and (nfc_type = 'nfc_passive' or nfc_type = 'nfc_active' or nfc_type = 'nfc_channelPay') 
+      	and (status = '0' or status = '3')
+      	and (merch_channel = 'ccb')
+  	</select>
+  	<!-- 查询中信退货交易流水 -->
+  	<select id="selRefundWater" resultMap="BaseResultMap">
+      	select * from DHB_NFC_ORDER_WATER where 1=1 
+      	and nfc_type = 'nfc_refund' 
+      	and status = '2'
+      	and merch_channel = 'ccb'
+  	</select>
+    <!-- 进行退货交易时使用,根据下游传入的退货订单，查询对应的原支付数据 -->
+    <select id="selOldRefundWater" resultMap="BaseResultMap">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from DHB_NFC_ORDER_WATER
+    	where 1=1 
+    	and order_no = #{0} 
+    	and merch_channel = #{1} 
+    	and nfc_merch = #{2} 
+  	</select>
+  	<!-- 退货查询时，查询原交易数据，为线上还是线下，支付宝还是微信 -->
+  	<select id="selOldTransRefundWater" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select 
+    	<include refid="Base_Column_List" />
+    	from DHB_NFC_ORDER_WATER
+    	where 
+    	mer_order_no = #{refundOrderNo,jdbcType=VARCHAR}
+    	or 
+    	channel_order_no = #{refundOrderNo,jdbcType=VARCHAR}
+  	</select>
+  	<!-- 根据日期查询指定通道成功的订单 -->
+  	<select id="selRfOrderWater" resultMap="BaseResultMap">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from DHB_NFC_ORDER_WATER
+    	where 1=1 
+    	and to_char(created_time,'yyyyMMdd') = #{0} 
+    	and merch_channel = #{1} 
+    	and status = #{2} 
+	</select>
+  	
+</mapper>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhl.ccb.dao.NfcOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zhl.ccb.model.NfcOrder" >
+    <id column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="REFUND_ORDER_NO" property="refundOrderNo" jdbcType="VARCHAR" />
+    <result column="SUB_MERCH_NO" property="subMerchNo" jdbcType="VARCHAR" />
+    <result column="MERCH_NO" property="merchNo" jdbcType="VARCHAR" />
+    <result column="MERCH_CHANNEL" property="merchChannel" jdbcType="VARCHAR" />
+    <result column="NFC_TYPE" property="nfcType" jdbcType="VARCHAR" />
+    <result column="NFC_MERCH" property="nfcMerch" jdbcType="VARCHAR" />
+    <result column="TOTAL_FEE" property="totalFee" jdbcType="DECIMAL" />
+    <result column="REFUND_FEE" property="refundFee" jdbcType="DECIMAL" />
+    <result column="REFUND_CHANNE" property="refundChanne" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="NOTIFY_URL" property="notifyUrl" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORDER_NO, REFUND_ORDER_NO, SUB_MERCH_NO, MERCH_NO, MERCH_CHANNEL, NFC_TYPE, NFC_MERCH, 
+    TOTAL_FEE, REFUND_FEE, REFUND_CHANNE, CURRENCY, NOTIFY_URL, REMARK, CREATED_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DHB_NFC_ORDER
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DHB_NFC_ORDER
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhl.ccb.model.NfcOrder" >
+    insert into DHB_NFC_ORDER (ORDER_NO, REFUND_ORDER_NO, SUB_MERCH_NO, 
+      MERCH_NO, MERCH_CHANNEL, NFC_TYPE, 
+      NFC_MERCH, TOTAL_FEE, REFUND_FEE, 
+      REFUND_CHANNE, CURRENCY, NOTIFY_URL, 
+      REMARK, CREATED_TIME)
+    values (#{orderNo,jdbcType=VARCHAR}, #{refundOrderNo,jdbcType=VARCHAR}, #{subMerchNo,jdbcType=VARCHAR}, 
+      #{merchNo,jdbcType=VARCHAR}, #{merchChannel,jdbcType=VARCHAR}, #{nfcType,jdbcType=VARCHAR}, 
+      #{nfcMerch,jdbcType=VARCHAR}, #{totalFee,jdbcType=DECIMAL}, #{refundFee,jdbcType=DECIMAL}, 
+      #{refundChanne,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createdTime})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhl.ccb.model.NfcOrder" >
+    insert into DHB_NFC_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="refundOrderNo != null" >
+        REFUND_ORDER_NO,
+      </if>
+      <if test="subMerchNo != null" >
+        SUB_MERCH_NO,
+      </if>
+      <if test="merchNo != null" >
+        MERCH_NO,
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL,
+      </if>
+      <if test="nfcType != null" >
+        NFC_TYPE,
+      </if>
+      <if test="nfcMerch != null" >
+        NFC_MERCH,
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE,
+      </if>
+      <if test="refundFee != null" >
+        REFUND_FEE,
+      </if>
+      <if test="refundChanne != null" >
+        REFUND_CHANNE,
+      </if>
+      <if test="currency != null" >
+        CURRENCY,
+      </if>
+      <if test="notifyUrl != null" >
+        NOTIFY_URL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundOrderNo != null" >
+        #{refundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subMerchNo != null" >
+        #{subMerchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchNo != null" >
+        #{merchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcType != null" >
+        #{nfcType,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcMerch != null" >
+        #{nfcMerch,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundFee != null" >
+        #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundChanne != null" >
+        #{refundChanne,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhl.ccb.model.NfcOrder" >
+    update DHB_NFC_ORDER
+    <set >
+      <if test="refundOrderNo != null" >
+        REFUND_ORDER_NO = #{refundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subMerchNo != null" >
+        SUB_MERCH_NO = #{subMerchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchNo != null" >
+        MERCH_NO = #{merchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcType != null" >
+        NFC_TYPE = #{nfcType,jdbcType=VARCHAR},
+      </if>
+      <if test="nfcMerch != null" >
+        NFC_MERCH = #{nfcMerch,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundFee != null" >
+        REFUND_FEE = #{refundFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundChanne != null" >
+        REFUND_CHANNE = #{refundChanne,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime},
+      </if>
+    </set>
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhl.ccb.model.NfcOrder" >
+    update DHB_NFC_ORDER
+    set REFUND_ORDER_NO = #{refundOrderNo,jdbcType=VARCHAR},
+      SUB_MERCH_NO = #{subMerchNo,jdbcType=VARCHAR},
+      MERCH_NO = #{merchNo,jdbcType=VARCHAR},
+      MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      NFC_TYPE = #{nfcType,jdbcType=VARCHAR},
+      NFC_MERCH = #{nfcMerch,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      REFUND_FEE = #{refundFee,jdbcType=DECIMAL},
+      REFUND_CHANNE = #{refundChanne,jdbcType=VARCHAR},
+      CURRENCY = #{currency,jdbcType=VARCHAR},
+      NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime}
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

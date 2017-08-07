@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhl.ccb.dao.NfcMerchMapper" >
+  <resultMap id="BaseResultMap" type="com.zhl.ccb.model.NfcMerch" >
+    <id column="MERCH_NO" property="merchNo" jdbcType="VARCHAR" />
+    <result column="MERCH_NAME" property="merchName" jdbcType="VARCHAR" />
+    <result column="MERCH_KEY" property="merchKey" jdbcType="VARCHAR" />
+    <result column="CHANNEL" property="channel" jdbcType="VARCHAR" />
+    <result column="MERCH_RATE" property="merchRate" jdbcType="DECIMAL" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MERCH_NO, MERCH_NAME, MERCH_KEY, CHANNEL, MERCH_RATE, CREATED_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DHB_NFC_MERCH
+    where MERCH_NO = #{merchNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DHB_NFC_MERCH
+    where MERCH_NO = #{merchNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhl.ccb.model.NfcMerch" >
+    insert into DHB_NFC_MERCH (MERCH_NO, MERCH_NAME, MERCH_KEY, 
+      CHANNEL, MERCH_RATE, CREATED_TIME
+      )
+    values (#{merchNo,jdbcType=VARCHAR}, #{merchName,jdbcType=VARCHAR}, #{merchKey,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{merchRate,jdbcType=DECIMAL}, #{createdTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhl.ccb.model.NfcMerch" >
+    insert into DHB_NFC_MERCH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchNo != null" >
+        MERCH_NO,
+      </if>
+      <if test="merchName != null" >
+        MERCH_NAME,
+      </if>
+      <if test="merchKey != null" >
+        MERCH_KEY,
+      </if>
+      <if test="channel != null" >
+        CHANNEL,
+      </if>
+      <if test="merchRate != null" >
+        MERCH_RATE,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchNo != null" >
+        #{merchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchName != null" >
+        #{merchName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchKey != null" >
+        #{merchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="merchRate != null" >
+        #{merchRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhl.ccb.model.NfcMerch" >
+    update DHB_NFC_MERCH
+    <set >
+      <if test="merchName != null" >
+        MERCH_NAME = #{merchName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchKey != null" >
+        MERCH_KEY = #{merchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="merchRate != null" >
+        MERCH_RATE = #{merchRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=DATE},
+      </if>
+    </set>
+    where MERCH_NO = #{merchNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhl.ccb.model.NfcMerch" >
+    update DHB_NFC_MERCH
+    set MERCH_NAME = #{merchName,jdbcType=VARCHAR},
+      MERCH_KEY = #{merchKey,jdbcType=VARCHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      MERCH_RATE = #{merchRate,jdbcType=DECIMAL},
+      CREATED_TIME = #{createdTime,jdbcType=DATE}
+    where MERCH_NO = #{merchNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

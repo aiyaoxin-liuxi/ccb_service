@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhl.ccb.dao.NfcTransBillWaterMapper" >
+  <resultMap id="BaseResultMap" type="com.zhl.ccb.model.NfcTransBillWater" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="MER_ORDER_NO" property="merOrderNo" jdbcType="VARCHAR" />
+    <result column="MERCH_CHANNEL" property="merchChannel" jdbcType="VARCHAR" />
+    <result column="TOTAL_FEE" property="totalFee" jdbcType="DECIMAL" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDER_NO, MER_ORDER_NO, MERCH_CHANNEL, TOTAL_FEE, CREATED_TIME, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DHB_NFC_TRANSBILL_WATER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DHB_NFC_TRANSBILL_WATER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhl.ccb.model.NfcTransBillWater" >
+    insert into DHB_NFC_TRANSBILL_WATER (ID, ORDER_NO, MER_ORDER_NO, 
+      MERCH_CHANNEL, TOTAL_FEE, CREATED_TIME, 
+      STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{merOrderNo,jdbcType=VARCHAR}, 
+      #{merchChannel,jdbcType=VARCHAR}, #{totalFee,jdbcType=DECIMAL}, #{createdTime,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhl.ccb.model.NfcTransBillWater" >
+    insert into DHB_NFC_TRANSBILL_WATER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="merOrderNo != null" >
+        MER_ORDER_NO,
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL,
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrderNo != null" >
+        #{merOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhl.ccb.model.NfcTransBillWater" >
+    update DHB_NFC_TRANSBILL_WATER
+    <set >
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrderNo != null" >
+        MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merchChannel != null" >
+        MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME = #{createdTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhl.ccb.model.NfcTransBillWater" >
+    update DHB_NFC_TRANSBILL_WATER
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      MER_ORDER_NO = #{merOrderNo,jdbcType=VARCHAR},
+      MERCH_CHANNEL = #{merchChannel,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      CREATED_TIME = #{createdTime,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+	<!-- 根据交易日期删除数据 -->
+	<delete id="deleteTransBillWater" parameterType="DATE" >
+	  delete from DHB_NFC_TRANSBILL_WATER
+	  where created_time = #{createdTime,jdbcType=DATE} and merch_channel = 'ccb'
+	</delete>
+  	<!-- 根据日期查询指定通道成功的订单 -->
+ 	<select id="selectCcbTransBillWater" resultMap="BaseResultMap">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from DHB_NFC_TRANSBILL_WATER
+    	where 1=1 
+    	and created_time = #{0} 
+    	and merch_channel = #{1} 
+    	and status = #{2} 
+	</select>
+  
+  
+  
+  
+  
+</mapper>
